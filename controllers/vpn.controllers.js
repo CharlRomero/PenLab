@@ -1,5 +1,5 @@
 import { Client } from "ssh2";
-import { HOST, PORT_SSH, USER, PASSWORD_SSH } from "../config.js";
+import { HOST, PORT_SSH, USER, PATH_SSH } from "../config.js";
 export const createVpn = (req, res) => {
   const username = req.body;
 
@@ -8,7 +8,7 @@ export const createVpn = (req, res) => {
     host: HOST,
     port: PORT_SSH,
     username: USER,
-    password: PASSWORD_SSH,
+    privateKey: require("fs").readdirSync(PATH_SSH),
   };
 
   conn

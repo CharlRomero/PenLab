@@ -10,7 +10,7 @@ export const createVpn = (req, res) => {
     host: HOST,
     port: PORT_SSH,
     username: USER,
-    privateKey: readFileSync(PATH_SSH),
+    privateKey: readFileSync(PATH_SSH, "utf8"),
   };
 
   conn

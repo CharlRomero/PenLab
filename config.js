@@ -10,4 +10,3 @@ export const DATABASE = process.env.DATABASE;
 export const PORT_SSH = process.env.PORT_SSH;
 export const USER = process.env.USER;
 export const PATH_SSH = process.env.PATH_SSH;
-export const PASSPHRASE = process.env.PASSPHRASE;

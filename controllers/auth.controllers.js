@@ -1,5 +1,7 @@
 import { pool } from "../database.js";
-import { hash_password } from "../utils/generate/generate_hash.utils.js";
+import { sign } from "jsonwebtoken";
+import { compare } from "bcryptjs";
+import { JWT_SECRET, JWT_COOKIE_EXPIRES, JWT_EXPIRE_TIME } from "../config.js";
 
 export const authentication = async (req, res) => {
   try {
@@ -8,14 +10,29 @@ export const authentication = async (req, res) => {
       return res
         .status(400)
         .json({ message: "Username and password are required" });
-    const [result] = await pool.query(
+    pool.query(
       "SELECT * FROM user WHERE user_name = ?",
-      [username]
+      [username],
+      async (error, result) => {
+        if (
+          result.length == 0 ||
+          !(await compare(password, result[0].user_password))
+        ) {
+          return res.status(401).json({ message: "Login failed" });
+        }
+        const id = result[0].id;
+        const token = sign({ id: id }, JWT_SECRET, {
+          expiresIn: JWT_EXPIRE_TIME,
+        });
+        const cookiesOptions = {
+          expires: new Date(
+            Date.now() + JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+          ),
+        };
+        res.cookie("jwt", token, cookiesOptions);
+        res.json({ message: "Login successful", user: result[0] });
+      }
     );
-    if (result.length === 0)
-      return res.status(401).json({ message: "Login failed" });
-    if (result[0].user_password === hash_password(password))
-      return res.json({ message: "Login successful", user: result[0] });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

@@ -1,9 +1,5 @@
 import { pool } from "../database.js";
-import { generate_salt } from "../utils/generate/generate_salt.utils.js";
-import {
-  hash_password,
-  hash_password_salt,
-} from "../utils/generate/generate_hash.utils.js";
+import { hash_password } from "../utils/generate/generate_hash.utils.js";
 import { generate_username } from "../utils/generate/generate_username.utils.js";
 
 export const getUsers = async (req, res) => {
@@ -37,11 +33,10 @@ export const createUser = async (req, res) => {
   try {
     const { password, email } = req.body;
     let username = generate_username(email);
-    let salt = generate_salt();
-    let hash = hash_password(password);
+    let hash = await hash_password(password);
     const [result] = await pool.query(
       "INSERT INTO user (user_name, user_password, user_email, user_salt) VALUES (?, ?, ?, ?)",
-      [username, hash, email, salt]
+      [username, hash.hash, email, hash.salt]
     );
     res.json({ id: result.insertId, username, email });
   } catch (error) {

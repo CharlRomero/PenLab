@@ -15,8 +15,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "morgan": "^1.10.0",
-    "mysql2": "^3.9.4",
-    "ssh2": "^1.15.0"
+    "mysql2": "^3.9.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

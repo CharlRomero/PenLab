@@ -1,18 +1,15 @@
-import { createHash, createHmac } from "crypto";
+import bcryptjs from "bcryptjs";
+import { generate_salt } from "./generate_salt.utils.js";
 
-export const hash_password_salt = (password, salt) => {
-  const hash = createHmac("sha256", salt);
-  hash.update(password);
-  const value = hash.digest("hex");
-  return {
-    salt,
-    hash: value,
-  };
-};
-
-export const hash_password = (password) => {
-  const hash = createHash("sha256");
-  hash.update(password);
-
-  return hash.digest("hex");
+export const hash_password = async (password) => {
+  try {
+    const salt = await generate_salt();
+    const hash = await bcryptjs.hash(password, salt);
+    return {
+      salt,
+      hash,
+    };
+  } catch (error) {
+    console.error(`Error hashing password: ${error}`);
+  }
 };

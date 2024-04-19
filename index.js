@@ -9,7 +9,7 @@ import vpnRoutes from "./routes/vpn.routes.js";
 const app = express();
 app.set("view engine", "ejs");
 
-app.use(cors({ credentials: true }));
+app.use(cors({ origin: "http://192.168.100.42:5173", credentials: true }));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -19,5 +19,6 @@ app.use(userRoutes);
 app.use(authRoutes);
 app.use(vpnRoutes);
 
-app.listen(PORT);
-console.log(`Server running in port ${PORT}`);
+app.listen(PORT, "0.0.0.0", () =>
+  console.log(`Server running in port ${PORT}`)
+);

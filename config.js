@@ -7,3 +7,5 @@ export const PORT_DB = process.env.PORT_DB;
 export const USER_DB = process.env.USER_DB;
 export const PASSWORD_DB = process.env.PASSWORD_DB;
 export const DATABASE = process.env.DATABASE;
+export const COMMAND = process.env.COMMAND;
+export const PASSWORD = process.env.PASSWORD;

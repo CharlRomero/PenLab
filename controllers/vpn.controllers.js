@@ -1,9 +1,10 @@
 import { exec } from "child_process";
+import { COMMAND, PASSWORD } from "../config.js";
 
 export const createVpn = (req, res) => {
   const { username } = req.body;
 
-  const command = `bash /home/penlab/generate_client.sh ${username}`;
+  const command = `expect ${COMMAND} ${username} ${PASSWORD}`;
 
   exec(command, (error, stdout, stderr) => {
     if (error) {

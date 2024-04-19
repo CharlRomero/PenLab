@@ -1,6 +1,6 @@
 import { pool } from "../database.js";
 import { sign } from "jsonwebtoken";
-import { compare } from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { JWT_SECRET, JWT_COOKIE_EXPIRES, JWT_EXPIRE_TIME } from "../config.js";
 
 export const authentication = async (req, res) => {
@@ -16,7 +16,7 @@ export const authentication = async (req, res) => {
       async (error, result) => {
         if (
           result.length == 0 ||
-          !(await compare(password, result[0].user_password))
+          !(await bcryptjs.compare(password, result[0].user_password))
         ) {
           return res.status(401).json({ message: "Login failed" });
         }

@@ -1,5 +1,5 @@
 import { pool } from "../database.js";
-import { sign } from "jsonwebtoken";
+import jsonwebtoken from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import { JWT_SECRET, JWT_COOKIE_EXPIRES, JWT_EXPIRE_TIME } from "../config.js";
 
@@ -21,7 +21,7 @@ export const authentication = async (req, res) => {
           return res.status(401).json({ message: "Login failed" });
         }
         const id = result[0].id;
-        const token = sign({ id: id }, JWT_SECRET, {
+        const token = jsonwebtoken.sign({ id: id }, JWT_SECRET, {
           expiresIn: JWT_EXPIRE_TIME,
         });
         const cookiesOptions = {

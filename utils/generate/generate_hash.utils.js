@@ -1,4 +1,5 @@
 import { createHash, createHmac } from "crypto";
+import { hash } from "bcryptjs";
 
 export const hash_password_salt = (password, salt) => {
   const hash = createHmac("sha256", salt);
@@ -11,8 +12,5 @@ export const hash_password_salt = (password, salt) => {
 };
 
 export const hash_password = (password) => {
-  const hash = createHash("sha256");
-  hash.update(password);
-
-  return hash.digest("hex");
+  return hash(password, 8);
 };

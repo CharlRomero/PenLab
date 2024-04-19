@@ -7,7 +7,6 @@ import authRoutes from "./routes/auth.routes.js";
 import vpnRoutes from "./routes/vpn.routes.js";
 
 const app = express();
-app.set("view engine", "ejs");
 
 app.use(cors());
 app.use(express.json());

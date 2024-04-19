@@ -3,7 +3,7 @@ import { exec } from "child_process";
 export const createVpn = (req, res) => {
   const { username } = req.body;
 
-  const command = `sh /home/penlab/generate_client.sh ${username}`;
+  const command = `bash /home/penlab/generate_client.sh ${username}`;
 
   exec(command, (error, stdout, stderr) => {
     if (error) {

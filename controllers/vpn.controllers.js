@@ -1,4 +1,5 @@
 import { exec } from "child_process";
+import { fileURLToPath } from "url";
 import { COMMAND, PASSWORD } from "../config.js";
 import path from "path";
 

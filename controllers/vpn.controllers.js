@@ -28,7 +28,7 @@ export const download_vpn = (req, res) => {
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const fileOvpn = path.join(
     __dirname,
-    `../../../etc/openvpn/client/files/${username}.ovpn`
+    `../../../../etc/openvpn/client/files/${username}.ovpn`
   );
   res.download(fileOvpn, `${username}.ovpn`);
 };

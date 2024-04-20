@@ -24,7 +24,7 @@ export const createVpn = (req, res) => {
 };
 
 export const download_vpn = (req, res) => {
-  const { username } = req.body;
+  const { username } = req.params;
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const fileOvpn = path.join(
     __dirname,

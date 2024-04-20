@@ -27,6 +27,7 @@ export const authentication = async (req, res) => {
     const cookiesOptions = {
       expires: new Date(Date.now() + JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
       httpOnly: true,
+      secure: false,
     };
     res.cookie("jwt", token, cookiesOptions);
     res.json({ message: "Login successful", user: result[0] });

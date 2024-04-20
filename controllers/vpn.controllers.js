@@ -26,13 +26,15 @@ export const createVpn = (req, res) => {
 export const download_vpn = (req, res) => {
   const { username } = req.params;
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const sanitizedUsername = path.basename(username);
   const fileOvpn = path.join(
     __dirname,
-    `../../../../etc/openvpn/client/files/${username}.ovpn`
+    `../../../../etc/openvpn/client/files/${sanitizedUsername}.ovpn`
   );
+  res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader(
     "Content-Disposition",
-    `attachment; filename="${username}.ovpn"`
+    `attachment; filename="${encodeURIComponent(`${username}.ovpn`)}"`
   );
   res.setHeader("Content-Type", "applications/octet-stream");
   res.sendFile(fileOvpn, `${username}.ovpn`, (err) => {

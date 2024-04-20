@@ -29,8 +29,14 @@ export const authentication = async (req, res) => {
       httpOnly: true,
       secure: false,
     };
+    const user = result[0];
+    const userResponse = {
+      id: user.id,
+      username: user.user_name,
+      email: user.user_email,
+    };
     res.cookie("jwt", token, cookiesOptions);
-    res.json({ message: "Login successful", user: result[0] });
+    res.json({ message: "Login successful", user: userResponse });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

@@ -1,5 +1,6 @@
 import { exec } from "child_process";
 import { COMMAND, PASSWORD } from "../config.js";
+import path from "path";
 
 export const createVpn = (req, res) => {
   const { username } = req.body;
@@ -19,4 +20,13 @@ export const createVpn = (req, res) => {
     }
     res.send(`Script ejecutado correctamente. ${stdout}`);
   });
+};
+
+export const download_vpn = (req, res) => {
+  const { username } = req.body;
+  const fileOvpn = path.join(
+    __dirname,
+    `/etc/openvpn/client/files/${username}.ovpn`
+  );
+  res.download(fileOvpn, `${username}.ovpn`);
 };

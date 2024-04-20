@@ -31,7 +31,7 @@ export const authentication = async (req, res) => {
     };
     const user = result[0];
     const userResponse = {
-      id: user.id,
+      id: user.user_id,
       username: user.user_name,
       email: user.user_email,
     };

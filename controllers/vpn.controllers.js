@@ -30,5 +30,10 @@ export const download_vpn = (req, res) => {
     __dirname,
     `../../../../etc/openvpn/client/files/${username}.ovpn`
   );
-  res.download(fileOvpn, `${username}.ovpn`);
+  res.download(fileOvpn, `${username}.ovpn`, (err) => {
+    if (err) {
+      console.log(`Error downloading file: ${err}`);
+      return res.status(404).send("File not found");
+    }
+  });
 };

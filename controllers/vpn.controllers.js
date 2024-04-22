@@ -19,7 +19,7 @@ export const createVpn = (req, res) => {
       console.log(`stderr: ${stderr}`);
       return res.status(500).send(`Error en el script: ${stderr}`);
     }
-    res.send(`Script ejecutado correctamente. ${stdout}`);
+    res.status(200).json({ message: "Created VPN" });
   });
 };
 
@@ -43,7 +43,6 @@ export const download_vpn = (req, res) => {
       return res.status(404).send("File not found");
     }
   });
-  res.status(200).json({ message: "Created VPN" });
 };
 
 export const vmDeploy = async (req, res) => {

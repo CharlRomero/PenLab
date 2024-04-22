@@ -1,6 +1,6 @@
 import { exec } from "child_process";
 import { fileURLToPath } from "url";
-import { COMMAND, PASSWORD } from "../config.js";
+import { COMMAND, PASSWORD, TOKEN } from "../config.js";
 import path from "path";
 
 export const createVpn = (req, res) => {
@@ -43,4 +43,28 @@ export const download_vpn = (req, res) => {
       return res.status(404).send("File not found");
     }
   });
+};
+
+export const vmDeploy = async (req, res) => {
+  const URL = `https://github.com/CharlRomero/PenLab/actions/workflows/vm-deploy/dispatches`;
+  const body = {
+    ref: "main",
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        Accept: "application/vnd.github.v3+json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) res.send("Works!");
+    else res.status(500).send("Failed deploy");
+  } catch (error) {
+    res.status(500).send("Error deploy");
+  }
 };

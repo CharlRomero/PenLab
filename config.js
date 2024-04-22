@@ -12,3 +12,4 @@ export const PASSWORD = process.env.PASSWORD;
 export const JWT_SECRET = process.env.JWT_SECRET;
 export const JWT_EXPIRE_TIME = process.env.JWT_EXPIRE_TIME;
 export const JWT_COOKIE_EXPIRES = process.env.JWT_COOKIE_EXPIRES;
+export const TOKEN = process.env.TOKEN;

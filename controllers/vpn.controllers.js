@@ -52,7 +52,7 @@ export const vmDeploy = async (req, res) => {
   };
 
   try {
-    const response = await fetch(url, {
+    const response = await fetch(URL, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {

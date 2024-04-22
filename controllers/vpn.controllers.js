@@ -62,8 +62,12 @@ export const vmDeploy = async (req, res) => {
       },
     });
 
-    if (response.ok) res.send("Works!");
-    else res.status(500).send("Failed deploy");
+    if (response.ok) {
+      res.send("Works!");
+    } else {
+      const errorMsg = await response.text();
+      res.status(500).send(`Failed deploy: ${errorMsg}`);
+    }
   } catch (error) {
     res.status(500).send("Error deploy");
   }

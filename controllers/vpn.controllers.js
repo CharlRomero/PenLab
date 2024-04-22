@@ -46,7 +46,7 @@ export const download_vpn = (req, res) => {
 };
 
 export const vmDeploy = async (req, res) => {
-  const URL = `https://github.com/CharlRomero/PenLab/actions/workflows/vm-deploy/dispatches`;
+  const URL = `https://api.github.com/CharlRomero/PenLab/actions/workflows/vm-deploy.yml/dispatches`;
   const body = {
     ref: "main",
   };

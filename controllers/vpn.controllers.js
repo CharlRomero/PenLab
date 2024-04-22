@@ -1,12 +1,12 @@
 import { exec } from "child_process";
 import { fileURLToPath } from "url";
-import { COMMAND, PASSWORD, TOKEN } from "../config.js";
+import { COMMAND, TOKEN } from "../config.js";
 import path from "path";
 
 export const createVpn = (req, res) => {
   const { username } = req.body;
 
-  const command = `expect ${COMMAND} ${username} ${PASSWORD}`;
+  const command = `bash ${COMMAND} ${username}`;
 
   exec(command, (error, stdout, stderr) => {
     if (error) {

@@ -4,8 +4,8 @@ import { COMMAND, TOKEN } from "../config.js";
 import path from "path";
 
 export const createVpn = (req, res) => {
-  const { username, password } = req.body;
-
+  const { email, password } = req.body;
+  let username = generate_username(email);
   const command = `bash ${COMMAND} ${username} ${password}`;
 
   exec(command, (error, stdout, stderr) => {

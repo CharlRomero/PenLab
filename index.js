@@ -9,7 +9,7 @@ import vpnRoutes from "./routes/vpn.routes.js";
 const app = express();
 app.set("view engine", "ejs");
 
-app.use(cors({ origin: "http://192.168.100.103:4000", credentials: true }));
+app.use(cors({ origin: "http://192.168.100.104:4000", credentials: true }));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));

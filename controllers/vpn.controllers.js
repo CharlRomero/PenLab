@@ -2,6 +2,7 @@ import { exec } from "child_process";
 import { fileURLToPath } from "url";
 import { COMMAND, TOKEN } from "../config.js";
 import path from "path";
+import { generate_username } from "../utils/generate/generate_username.utils.js";
 
 export const createVpn = (req, res) => {
   const { email, password } = req.body;

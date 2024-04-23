@@ -4,9 +4,9 @@ import { COMMAND, TOKEN } from "../config.js";
 import path from "path";
 
 export const createVpn = (req, res) => {
-  const { username } = req.body;
+  const { username, password } = req.body;
 
-  const command = `bash ${COMMAND} ${username}`;
+  const command = `bash ${COMMAND} ${username} ${password}`;
 
   exec(command, (error, stdout, stderr) => {
     if (error) {
@@ -29,7 +29,7 @@ export const download_vpn = (req, res) => {
   const sanitizedUsername = path.basename(username);
   const fileOvpn = path.join(
     __dirname,
-    `../../../../etc/openvpn/client/files/${sanitizedUsername}.ovpn`
+    `../../../../etc/openvpn/client/files/${sanitizedUsername}.tar`
   );
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader(

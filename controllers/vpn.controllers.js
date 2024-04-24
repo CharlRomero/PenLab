@@ -30,7 +30,7 @@ export const download_vpn = (req, res) => {
   const sanitizedUsername = path.basename(username);
   const fileOvpn = path.join(
     __dirname,
-    `../../../../etc/openvpn/client/files/${sanitizedUsername}.tar`
+    `../../../../etc/openvpn/client/files/${sanitizedUsername}.zip`
   );
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader(

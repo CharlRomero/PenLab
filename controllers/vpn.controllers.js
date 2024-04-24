@@ -35,10 +35,10 @@ export const download_vpn = (req, res) => {
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader(
     "Content-Disposition",
-    `attachment; filename="${encodeURIComponent(`${username}.ovpn`)}"`
+    `attachment; filename="${encodeURIComponent(`${username}.zip`)}"`
   );
   res.setHeader("Content-Type", "applications/octet-stream");
-  res.sendFile(fileOvpn, `${username}.ovpn`, (err) => {
+  res.sendFile(fileOvpn, `${username}.zip`, (err) => {
     if (err) {
       console.log(`Error downloading file: ${err}`);
       return res.status(404).send("File not found");

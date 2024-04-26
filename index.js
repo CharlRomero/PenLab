@@ -10,7 +10,7 @@ import { HOST_FRONT } from "./config.js";
 const app = express();
 app.set("view engine", "ejs");
 
-app.use(cors({ origin: HOST_FRONT, credentials: true }));
+app.use(cors({ origin: "http://192.168.100.100:4000", credentials: true }));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));

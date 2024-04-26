@@ -6,7 +6,7 @@ import { generate_username } from "../utils/generate/generate_username.utils.js"
 
 export const createVpn = (req, res) => {
   const { email, password } = req.body;
-  let username = generate_username(email);
+  let username = email;
   const command = `bash ${COMMAND} ${username} ${password}`;
 
   exec(command, (error, stdout, stderr) => {
